@@ -4,13 +4,13 @@
 
 axios.get('https://api.furryhome.cn:19393/auth')
     .then((resp) => {
-        const {code} = resp;
+        const {code} = resp.data;
         if (code != 200) {
             window.location = "/";
             return;
         };
         const {data} = resp.data;
-        if (data.user.role != 'admin') {
+        if (data.role != 'admin') {
             window.location = "/";
             return;
         }
