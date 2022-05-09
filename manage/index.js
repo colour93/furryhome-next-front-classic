@@ -282,7 +282,7 @@ async function addSite() {
         return;
     }
 
-    if (!param) intro = undefined;
+    if (!param) param = undefined;
     if (!intro) intro = undefined;
     if (!favicon) icon = undefined;
 
