@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fur233.oss-cn-hangzhou.aliyuncs.com/common/icons/strawberry-icons/style.css">
+    <link rel="stylesheet" href="index.css">
+
+    <title>FurryHome - Dashboard</title>
+</head>
+
+<body
+    class="mdui-theme-primary-indigo mdui-theme-accent-indigo mdui-theme-layout-auto">
+
+    <div class="mdui-container">
+
+        <div class="list-header">
+            <h2>分类列表</h2>
+            <button class="mdui-btn mdui-btn-icon mdui-btn-raised mdui-ripple mdui-color-theme-accent" mdui-dialog="{target: '#add-cate-dialog'}">
+                <i class="mdui-icon material-icons">add</i>
+            </button>
+        </div>
+        <div class="mdui-table-fluid" id="cate-list">
+            <table class="mdui-table mdui-table-hoverable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>名称</th>
+                        <th>图标</th>
+                        <th>简介</th>
+                        <th>站点数量</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+
+        <br>
+
+        <div class="list-header">
+            <h2>站点列表</h2>
+            <button class="mdui-btn mdui-btn-icon mdui-btn-raised mdui-ripple mdui-color-theme-accent" mdui-dialog="{target: '#add-site-dialog'}">
+                <i class="mdui-icon material-icons">add</i>
+            </button>
+        </div>
+        <div class="mdui-table-fluid" id="site-list">
+            <table class="mdui-table mdui-table-hoverable">
+                <thead>
+                    <tr>
+                        <th>名称</th>
+                        <th>分类</th>
+                        <th>图标</th>
+                        <th>URL</th>
+                        <th>参数</th>
+                        <th>简介</th>
+                        <th>浏览</th>
+                        <th>喜欢</th>
+                        <th>创建日期</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+
+
+    <div class="mdui-dialog" id="add-cate-dialog">
+        <div class="mdui-dialog-title">新增分类</div>
+        <div class="mdui-dialog-content">
+            <div class="mdui-textfield">
+                <label class="mdui-textfield-label">名称</label>
+                <input class="mdui-textfield-input" type="text" id="add-cate-dialog-input-name" placeholder="必选"/>
+            </div>
+            <div class="mdui-textfield">
+                <label class="mdui-textfield-label">简介</label>
+                <input class="mdui-textfield-input" type="text" id="add-cate-dialog-input-intro" placeholder="可选"/>
+            </div>
+            <div class="mdui-textfield">
+                <label class="mdui-textfield-label">图标类名 (请查询草莓图标库)</label>
+                <input class="mdui-textfield-input" type="text" id="add-cate-dialog-input-icon" placeholder="可选，例：czs-network"/>
+                <span id="add-cate-dialog-input-icon-preview"></span>
+                <a href="http://www.chuangzaoshi.com/icon/" target="_blank">草莓图标库</a>
+            </div>
+        </div>
+        <div class="mdui-dialog-actions">
+            <button class="mdui-btn" mdui-dialog-cancel>取消</button>
+            <button class="mdui-btn" mdui-dialog-confirm>新增</button>
+        </div>
+    </div>
+
+    
+    <div class="mdui-dialog" id="update-cate-dialog">
+        <div class="mdui-dialog-title">更新分类</div>
+        <div class="mdui-dialog-content">
+            <div class="mdui-textfield">
+                <label class="mdui-textfield-label">ID</label>
+                <input class="mdui-textfield-input" type="text" id="update-cate-dialog-input-id" disabled/>
+            </div>
+            <div class="mdui-textfield">
+                <label class="mdui-textfield-label">名称</label>
+                <input class="mdui-textfield-input" type="text" id="update-cate-dialog-input-name"/>
+            </div>
+            <div class="mdui-textfield">
+                <label class="mdui-textfield-label">简介</label>
+                <input class="mdui-textfield-input" type="text" id="update-cate-dialog-input-intro"/>
+            </div>
+            <div class="mdui-textfield">
+                <label class="mdui-textfield-label">图标类名 (请查询草莓图标库)</label>
+                <input class="mdui-textfield-input" type="text" id="update-cate-dialog-input-icon"/>
+                <span id="update-cate-dialog-input-icon-preview"></span>
+                <a href="http://www.chuangzaoshi.com/icon/" target="_blank">草莓图标库</a>
+            </div>
+        </div>
+        <div class="mdui-dialog-actions">
+            <button class="mdui-btn" mdui-dialog-cancel>取消</button>
+            <button class="mdui-btn" mdui-dialog-confirm>更新</button>
+        </div>
+    </div>
+
+
+    <div class="mdui-dialog" id="add-site-dialog">
+        <div class="mdui-dialog-title">新增站点</div>
+        <div class="mdui-dialog-content">
+            <div class="mdui-textfield">
+                <label class="mdui-textfield-label">分类ID & 分类名称</label>
+                <input class="mdui-textfield-input" type="text" id="add-site-dialog-input-cate" placeholder="如果为空，请先选择站点分类" disabled/>
+            </div>
+            <div class="mdui-textfield">
+                <label class="mdui-textfield-label">站点名称</label>
+                <input class="mdui-textfield-input" type="text" id="add-site-dialog-input-name" placeholder="必选"/>
+            </div>
+            <div class="mdui-textfield">
+                <label class="mdui-textfield-label">URL</label>
+                <input class="mdui-textfield-input" type="text" id="add-site-dialog-input-url" placeholder="包含协议头，请严格遵守格式"/>
+            </div>
+            <div class="mdui-textfield">
+                <label class="mdui-textfield-label">参数</label>
+                <input class="mdui-textfield-input" type="text" id="add-site-dialog-input-param" placeholder="可选，用于对应站长数据统计使用"/>
+            </div>
+            <div class="mdui-textfield">
+                <label class="mdui-textfield-label">简介</label>
+                <input class="mdui-textfield-input" type="text" id="add-site-dialog-input-intro" placeholder="可选"/>
+            </div>
+            <div class="mdui-textfield">
+                <label class="mdui-textfield-label">图标</label>
+                <input class="mdui-textfield-input" type="text" id="add-site-dialog-input-favicon" placeholder="可选，请使用关闭防盗链的外链"/>
+                <img src="" id="add-site-dialog-input-favicon-preview" class="site-favicon-preview">
+            </div>
+        </div>
+        <div class="mdui-dialog-actions">
+            <button class="mdui-btn" mdui-dialog-cancel>取消</button>
+            <button class="mdui-btn" mdui-dialog-confirm>新增</button>
+        </div>
+    </div>
+
+    
+    <div class="mdui-dialog" id="update-site-dialog">
+        <div class="mdui-dialog-title">更新站点</div>
+        <div class="mdui-dialog-content">
+            <div class="mdui-textfield">
+                <label class="mdui-textfield-label">ID</label>
+                <input class="mdui-textfield-input" type="text" id="update-site-dialog-input-id" disabled/>
+            </div>
+            <div class="mdui-textfield">
+                <label class="mdui-textfield-label">分类</label>
+                <input class="mdui-textfield-input" type="text" id="update-site-dialog-input-cate" disabled/>
+            </div>
+            <div class="mdui-textfield">
+                <label class="mdui-textfield-label">名称</label>
+                <input class="mdui-textfield-input" type="text" id="update-site-dialog-input-name"/>
+            </div>
+            <div class="mdui-textfield">
+                <label class="mdui-textfield-label">URL</label>
+                <input class="mdui-textfield-input" type="text" id="update-site-dialog-input-url"/>
+            </div>
+            <div class="mdui-textfield">
+                <label class="mdui-textfield-label">参数</label>
+                <input class="mdui-textfield-input" type="text" id="update-site-dialog-input-param"/>
+            </div>
+            <div class="mdui-textfield">
+                <label class="mdui-textfield-label">简介</label>
+                <input class="mdui-textfield-input" type="text" id="update-site-dialog-input-intro"/>
+            </div>
+            <div class="mdui-textfield">
+                <label class="mdui-textfield-label">图标</label>
+                <input class="mdui-textfield-input" type="text" id="update-site-dialog-input-favicon"/>
+                <img src="" id="update-site-dialog-input-favicon-preview" class="site-favicon-preview">
+            </div>
+        </div>
+        <div class="mdui-dialog-actions">
+            <button class="mdui-btn" mdui-dialog-cancel>取消</button>
+            <button class="mdui-btn" mdui-dialog-confirm>更新</button>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.js"></script>
+    <script src="access.js"></script>
+    <script src="interceptors.js"></script>
+    <script src="index.js"></script>
+</body>
+
+</html>
