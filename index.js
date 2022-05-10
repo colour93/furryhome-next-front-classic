@@ -77,7 +77,7 @@ async function loadCard () {
                             </figure>
                         </div>
                         <div class="media-content">
-                            <a href="${siteUrl}/${null || siteParam}" target="_blank" onclick="viewSite('${siteId}')">
+                            <a href="${siteUrl}/${siteParam ? siteParam : ""}" target="_blank" onclick="viewSite('${siteId}')">
                                 <div class="card-title text-truncate">
                                     ${siteName} </div>
                                 <div class="card-desc">
