@@ -1,7 +1,5 @@
 const $ = mdui.$;
 
-const APIURL = "https://api.furryhome.cn:19393";
-
 let currentCateId = 0;
 let dataList = [];
 let currentCate = {};
