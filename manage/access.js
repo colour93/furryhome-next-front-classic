@@ -2,7 +2,7 @@
  * just access and redirect
  */
 
-axios.get('https://api.furryhome.cn:19393/auth')
+axios.get(APIURL + '/auth')
     .then((resp) => {
         const {code} = resp.data;
         if (code != 200) {

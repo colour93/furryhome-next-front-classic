@@ -3,7 +3,6 @@
  * 不想写呜呜呜
  */
 
-const APIURL = "https://api.furryhome.cn:19393";
 let dataList;
 
 window.onload = () => {
