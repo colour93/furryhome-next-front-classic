@@ -1,0 +1,37 @@
+body {
+    max-width: 1920px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.navbar-end {
+    display: none !important
+}
+
+.menu-group .menu-item,
+.sidenav-desc {
+    color: #a0a0a0
+}
+
+.fix-tools .submit,
+.fighting.active {
+    box-shadow: 0px 2px 10px #888888
+}
+
+.navbar-item-logo {
+    margin-left: 0;
+}
+
+.navbar-item {
+    font-weight: 600;
+}
+
+@media screen and (min-width: 600px) {
+    #navTitle {
+        display: none !important
+    }
+
+    .navbar {
+        background: #f6f6f6;
+    }
+}

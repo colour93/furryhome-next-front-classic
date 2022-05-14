@@ -9,6 +9,7 @@ window.onload = () => {
 
     axiosInterceptor();
     loadCard();
+    let scroll = new SmoothScroll('a[href*="#"]');
 
 }
 

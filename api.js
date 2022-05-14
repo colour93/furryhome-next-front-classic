@@ -1,1 +1,1 @@
-const APIURL = "https://furryhome.cn"
+const APIURL = "https://api.furryhome.cn"
