@@ -10,12 +10,13 @@ window.onload = () => {
     axiosInterceptor();
     loadCard();
     let scroll = new SmoothScroll('a[href*="#"]');
+    initNotice();
 
 }
 
 // axios拦截器
-function axiosInterceptor () {
-    
+function axiosInterceptor() {
+
     axios.defaults.withCredentials = true;
 
     axios.interceptors.response.use(function (response) {
@@ -29,8 +30,34 @@ function axiosInterceptor () {
 
 }
 
-// 初始化加载数据
-async function loadCard () {
+// 初始化滚动条
+function initNotice() {
+    var $noticeWrap = $(".notice-carousel-wrap");
+    $noticeWrap.each(function () {
+        var e = $(this).find(".notice-item").length,
+            t = $(this);
+        1 < e && setInterval(function () {
+            t.stop(!0, !0).animate({
+                top: "-44px"
+            }, 200, function () {
+                t.css("top", "-2px"), t.append(t.find(".notice-item:first"))
+            })
+        }, 6e3)
+    }), $(document).on("click", ".fighting", function () {
+        $("body, html").animate({
+            scrollTop: 0
+        }, 600)
+    }), $(window).scroll(function () {
+        1e3 < $(document).scrollTop() ? $(".fighting").addClass("active") : $(".fighting").removeClass("active")
+    }), window.onload = function () {
+        $(window).trigger("scroll")
+    }, $(window).resize(function () {
+        $(window).trigger("scroll")
+    });
+}
+
+// 加载站点卡片
+async function loadCard() {
 
     r = await axios.get(APIURL + '/site/list').then(resp => resp.data.data);
 
@@ -43,7 +70,7 @@ async function loadCard () {
     let k = 1;
 
     for (let i = 0; i < r.length; i++) {
-        const {cateId, cateName, cateIntro, cateIcon, siteList} = r[i];
+        const { cateId, cateName, cateIntro, cateIcon, siteList } = r[i];
         navHtml += `
         <div class="menu-group">
             <a href="#${cateId}" class="menu-item">
@@ -63,7 +90,7 @@ async function loadCard () {
         for (let j = 0; j < siteList.length; j++) {
             k++;
 
-            const {siteId, siteName, siteUrl, siteIntro, siteFavicon, siteViews, siteLikes, liked, siteParam} = siteList[j];
+            const { siteId, siteName, siteUrl, siteIntro, siteFavicon, siteViews, siteLikes, liked, siteParam } = siteList[j];
 
             cardHtml += `
             <div class="col-xl-3 col-lg-4 col-md-6">
@@ -108,14 +135,14 @@ async function loadCard () {
 
 }
 
-
+// 喜欢某站点
 async function likeSite(siteId) {
 
     r = await axios.get(APIURL + '/site/like?siteId=' + siteId).then(resp => resp.data);
 
     if (r.code != 200) return;
 
-    const {data} = r;
+    const { data } = r;
 
     $(`#site-like-${data.site.siteId}`).addClass('active');
 
@@ -125,7 +152,8 @@ async function likeSite(siteId) {
 
 }
 
-function viewSite (siteId) {
+// 浏览某站点
+function viewSite(siteId) {
 
     axios.get(APIURL + '/site/view?siteId=' + siteId);
 
